@@ -3074,6 +3074,7 @@ GameObject:
   - component: {fileID: 1210756881}
   - component: {fileID: 1210756882}
   - component: {fileID: 1210756883}
+  - component: {fileID: 1210756884}
   m_Layer: 2
   m_Name: Player
   m_TagString: Untagged
@@ -3279,6 +3280,19 @@ MonoBehaviour:
   - Mad Cuz Bad
   - Get Good
   checkpoint: {fileID: 92325435}
+--- !u!114 &1210756884
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1210756873}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 92e3498e13c66bb4ca760aed13402d7f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  movementAblilitesOwned: 0000
 --- !u!4 &1238466116 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8214778688951250306, guid: 8e3519ecb04b88847b0e61ec105624b7, type: 3}
