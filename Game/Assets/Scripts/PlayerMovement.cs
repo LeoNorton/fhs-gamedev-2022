@@ -34,6 +34,7 @@ public class PlayerMovement : MonoBehaviour
     private int _groundLayer; // log base 2 of ground (^) actually used
     private Rigidbody2D _rigidBody;
     private WaterLevel _waterLevel;
+    private MovementAbilities _movementAblilities;
 
 
     [SerializeField] private Transform _camera;
@@ -44,6 +45,7 @@ public class PlayerMovement : MonoBehaviour
         _rigidBody = GetComponent<Rigidbody2D>();
         _waterLevel = GetComponent<WaterLevel>();
         _playerAnimation = GetComponent<PlayerAnimation>();
+        _movementAblilities = GetComponent<MovementAbilities>();
     }
 
     void Update()
@@ -55,14 +57,19 @@ public class PlayerMovement : MonoBehaviour
         _isGrounded = groundedRaycast.collider != null;
         
         GroundJump();
-        WallJump();
+
+        if (_movementAblilities.movementAblilitesOwned[1] == true)
+            WallJump();
 
         // sprinting
         //runSpeed = baseRunSpeed * (Input.GetKey(KeyCode.LeftShift) ? sprintSpeedMultiplier : 1);
 
-        // Dashing
-        if (Input.GetKey(KeyCode.LeftShift) && _canDash)
-            StartCoroutine(Dash());
+        if (_movementAblilities.movementAblilitesOwned[0] == true)
+        {
+            // Dashing
+            if (Input.GetKey(KeyCode.LeftShift) && _canDash)
+                StartCoroutine(Dash());
+        }
 
         //set velocity of rigidbody based on horizontal input, add the wall jump momentum, clamp the vertical speed for falling and wall accelerating upward
         _rigidBody.velocity = new Vector2((_runSpeed * Input.GetAxisRaw("Horizontal")) + _wallJumpSideDistNow, Mathf.Clamp(_rigidBody.velocity.y, -_maxVertSpeed, _maxVertSpeed));
