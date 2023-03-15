@@ -49,3 +49,6 @@ TagManager:
   - name: In front
     uniqueID: 1388355555
     locked: 0
+  - name: Particle
+    uniqueID: 2182743115
+    locked: 0

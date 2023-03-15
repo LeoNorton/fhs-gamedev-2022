@@ -16,7 +16,7 @@ public class WaterDroplet: MonoBehaviour
 
     void Update()
     {
-        if (dropletFX.activeSelf == false)
+        if (!dropletFX.activeSelf)
         {
      	    StartCoroutine(ReappearDelay());
      	}   
