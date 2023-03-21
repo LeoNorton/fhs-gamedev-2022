@@ -4,15 +4,10 @@ using UnityEngine;
 
 public class PlayerAnimation : MonoBehaviour
 {
-    [SerializeField] private List<Sprite> _idleSprites;
-    [SerializeField] private List<Sprite> _runningSprites;
-    [SerializeField] private List<Sprite> _fallingSprites;
-    private int _idleNum;
+    [SerializeField] Animator _animator;
     private SpriteRenderer _renderer;
     private Rigidbody2D _rigidBody;
-
-    [SerializeField] private float _period = 1f;
-    private float _lastChanged;
+    private bool isFlipped = false;//manages direction of player when idle
 
     [SerializeField] private AnimationState _state = AnimationState.Idle;
     [HideInInspector] public AnimationState State { get { return _state; } set { _state = value; } }
@@ -25,38 +20,25 @@ public class PlayerAnimation : MonoBehaviour
 
     void Update()
     {
-        switch (_state)
+        if (_state == AnimationState.Running)//if player is running
+            _animator.SetBool("IsRunning", true);
+        else
+            _animator.SetBool("IsRunning", false);
+
+        if (_state == AnimationState.Falling)//if player is falling
+            _animator.SetBool("IsFalling", true);
+        else
+            _animator.SetBool("IsFalling", false);
+
+        if (Input.GetAxisRaw("Horizontal") != 0)//GetAxisRaw makes for snappier turning
         {
-            case AnimationState.Idle:
-                SwitchSprites(_idleSprites);
-                break;
-            case AnimationState.Running:
-                SwitchSprites(_runningSprites);
-                break;
-            case AnimationState.Falling:
-                SwitchSprites(_fallingSprites);
-                break;
+            _renderer.flipX = (_rigidBody.velocity.x < 0);//simple flip sprite based on velocity(to make it look the direction of movement)
+            if (_rigidBody.velocity.x != 0)
+                isFlipped = _renderer.flipX;//store direction the player ends movement facing
         }
-        if (Input.GetAxis("Horizontal") != 0) _renderer.flipX = (_rigidBody.velocity.x < 0);
-        //simple flip sprite based on velocity(to make it look the direction of movement)
-    }
-
-    private void SwitchSprites(List<Sprite> spriteList)
-    {
-        if ((Time.time - _lastChanged) >= _period)
+        else
         {
-            if (_idleNum < spriteList.Count)
-            {
-                _renderer.sprite = spriteList[_idleNum];
-                _idleNum++;
-            }
-            else if (_idleNum >= spriteList.Count)
-            {
-                _idleNum = 0;
-                _renderer.sprite = spriteList[_idleNum];
-            }
-
-            _lastChanged = Time.time;
+            _renderer.flipX = isFlipped;//faces player in the correct direction at end of movement
         }
     }
 }

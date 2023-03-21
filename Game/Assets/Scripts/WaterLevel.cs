@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using DG.Tweening;
 
 public class WaterLevel : MonoBehaviour
 {
@@ -15,14 +16,17 @@ public class WaterLevel : MonoBehaviour
     [SerializeField] Image _indicatorUi;
     [SerializeField] List<Sprite> _dropletSprites;
     [SerializeField] ParticleSystem _splashParticles;
+    [SerializeField] ParticleSystem _waterPickupParticles;   
     [SerializeField] GameObject _spriteRenderer;
     
     private float _maxWaterAmount;
     private bool _isInLake = false;
- 
+
+    private int previousDropletIndex;
 
     private void Start()
     {
+        previousDropletIndex = _dropletSprites.Count - 1;
         _maxWaterAmount = _waterAmount;
     }
 
@@ -33,8 +37,13 @@ public class WaterLevel : MonoBehaviour
             _waterAmount -= _dryingRate * Time.deltaTime; //Decrease water level by drying rate
         _healthBarSlider.value = _waterAmount / _maxWaterAmount;
 
-        var dropletSpriteIndex = Mathf.Clamp(_dropletSprites.Count - (int)(_waterAmount / _maxWaterAmount * _dropletSprites.Count) - 1, 0, _dropletSprites.Count - 1);
+        int dropletSpriteIndex = Mathf.Clamp(_dropletSprites.Count - (int)(_waterAmount / _maxWaterAmount * _dropletSprites.Count) - 1, 0, _dropletSprites.Count - 1);
         _indicatorUi.sprite = _dropletSprites[dropletSpriteIndex];
+        if (dropletSpriteIndex != previousDropletIndex)
+        {
+            _indicatorUi.transform.DOPunchScale(Vector3.one * 0.25f, 0.25f, 1);
+        }
+        previousDropletIndex = dropletSpriteIndex;
 
         if (_isInLake && WaterAmount < _maxWaterAmount)
         {
@@ -50,6 +59,8 @@ public class WaterLevel : MonoBehaviour
     {
         if (collision.GetComponentInParent<WaterDroplet>() != null && _waterAmount < _maxWaterAmount) //Check if the collider's parent has WaterDroplet script(droplet detection)
         {
+            GameObject newWaterParticles = Instantiate(_waterPickupParticles, collision.transform.position, Quaternion.identity).gameObject;
+            Destroy(newWaterParticles, 2f);
             WaterDroplet dropletScript = collision.GetComponentInParent<WaterDroplet>();
             _waterAmount += dropletScript.fillAmount;//increse water level by droplet's fillamount
             if (_waterAmount > _maxWaterAmount) _waterAmount = _maxWaterAmount;
