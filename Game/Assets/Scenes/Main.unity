@@ -3236,7 +3236,7 @@ MonoBehaviour:
   - {fileID: -1355473590, guid: c8e15ee318d95e748a57dd8ff488da92, type: 3}
   - {fileID: 1406511399, guid: c8e15ee318d95e748a57dd8ff488da92, type: 3}
   _splashParticles: {fileID: 1736119489}
-  _waterPickupParticles: {fileID: 0}
+  _waterPickupParticles: {fileID: 8751170050658661045, guid: d7e49237a99d1914baafff52c2cfca14, type: 3}
   _spriteRenderer: {fileID: 457120379}
 --- !u!114 &1210756883
 MonoBehaviour:
@@ -10140,7 +10140,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4f231c4fb786f3946a6b90b886c48677, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_SendPointerHoverToParent: 1
   m_HorizontalAxis: Horizontal
   m_VerticalAxis: Vertical
   m_SubmitButton: Submit
