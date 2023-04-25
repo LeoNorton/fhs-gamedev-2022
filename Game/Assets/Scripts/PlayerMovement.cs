@@ -53,6 +53,8 @@ public class PlayerMovement : MonoBehaviour
         /*if (_canDash && Input.GetKey(KeyCode.Space))
             StartCoroutine(Dash());*/
         RaycastHit2D groundedRaycast = Physics2D.Raycast(transform.position, -Vector2.up, _groundedDist);//grounded raycast to detect if on the ground
+        if (_isGrounded == false && groundedRaycast.collider != null)
+            SoundManager.Instance.PlaySoundEffect(SoundType.Landing);
         _isGrounded = groundedRaycast.collider != null;
         
         GroundJump();
@@ -90,7 +92,7 @@ public class PlayerMovement : MonoBehaviour
 
         if (((Input.GetButtonDown("Vertical") && Input.GetAxisRaw("Vertical") > 0) || Input.GetKeyDown(KeyCode.Space)) && _isGrounded && _canJump == true) //if vertical input, is grounded, and doesn't have jump cooldown 
         {
-            _canDash = true;
+            SoundManager.Instance.PlaySoundEffect(SoundType.Jump);
             StartCoroutine(JumpDelay());//Small cooldown for jump
             _rigidBody.velocity += Vector2.up * _jumpHeight;
             // camera.GetComponent<CameraShake>().cameraShake();
@@ -104,6 +106,7 @@ public class PlayerMovement : MonoBehaviour
 
         if ((left.collider != null || right.collider != null) && /*Mathf.Abs(Input.GetAxisRaw("Horizontal")) > 0 &&*/ (Input.GetButtonDown("Vertical") || Input.GetKeyDown(KeyCode.Space)) && _canJump)
         {
+            SoundManager.Instance.PlaySoundEffect(SoundType.Jump);
             StartCoroutine(JumpDelay());
             //rigidBody.velocity = new Vector2(rigidBody.velocity.x, 0); //
             _rigidBody.velocity = Vector2.up * _jumpHeight;
@@ -126,6 +129,7 @@ public class PlayerMovement : MonoBehaviour
     IEnumerator Dash()//sets gravity to 0, turns on dash trail, adds horizontal velocity in the same way as wall jump
     {
         _canDash = false;
+        SoundManager.Instance.PlaySoundEffect(SoundType.Dashy);
         float originalGravity = _rigidBody.gravityScale;
         _rigidBody.gravityScale = 0f;
         _rigidBody.velocity = new Vector2(_rigidBody.velocity.x, 0);

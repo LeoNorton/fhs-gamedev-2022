@@ -65,9 +65,14 @@ public class WaterLevel : MonoBehaviour
             _waterAmount += dropletScript.fillAmount;//increse water level by droplet's fillamount
             if (_waterAmount > _maxWaterAmount) _waterAmount = _maxWaterAmount;
             collision.gameObject.SetActive(false); //set just FX and collider of droplet inactive(not parent w/ script_
+            SoundManager.Instance.PlaySoundEffect(SoundType.Drinkwater);
         }
         if (collision.GetComponent<Lake>() != null)
+        {
+            if (_isInLake == false)
+                SoundManager.Instance.PlaySoundEffect(SoundType.Splash);
             _isInLake = true;
+        }
     }
 
     private void OnTriggerExit2D(Collider2D collision)
@@ -93,6 +98,7 @@ public class WaterLevel : MonoBehaviour
     {
         if (!_isInvincible)
         {
+            SoundManager.Instance.PlaySoundEffect(SoundType.Hurty);
             StartCoroutine(IFrameDelay());
             _waterAmount -= damage;
             _splashParticles.Emit(5);
