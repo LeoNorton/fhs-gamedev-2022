@@ -12,7 +12,7 @@ public class PlayerMovement : MonoBehaviour
     //[SerializeField] private float sprintSpeedMultiplier = 2f;
 
     [Header("Dashing")]
-    private bool _canDash = false;
+    private bool _canDash = true;
     [SerializeField] private float _dashPowerMultiplier = 1f;
     [SerializeField] private float _dashingTime = 0.3f;
     [SerializeField] private float _dashingCooldown = 1f;
@@ -50,9 +50,8 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
-        if (_isGrounded) _canDash = false;
-        if (_canDash && Input.GetKey(KeyCode.Space))
-            StartCoroutine(Dash());
+        /*if (_canDash && Input.GetKey(KeyCode.Space))
+            StartCoroutine(Dash());*/
         RaycastHit2D groundedRaycast = Physics2D.Raycast(transform.position, -Vector2.up, _groundedDist);//grounded raycast to detect if on the ground
         _isGrounded = groundedRaycast.collider != null;
         
@@ -62,7 +61,7 @@ public class PlayerMovement : MonoBehaviour
             WallJump();
 
         // sprinting
-        //runSpeed = baseRunSpeed * (Input.GetKey(KeyCode.LeftShift) ? sprintSpeedMultiplier : 1);
+        //runSpeed = baseRunSpeed * (Input.GetKey(KeyCode.LeftShift) sprintSpeedMultiplier : 1);
 
         if (_movementAblilities.movementAblilitesOwned[0] == true)
         {
@@ -127,7 +126,6 @@ public class PlayerMovement : MonoBehaviour
     IEnumerator Dash()//sets gravity to 0, turns on dash trail, adds horizontal velocity in the same way as wall jump
     {
         _canDash = false;
-        
         float originalGravity = _rigidBody.gravityScale;
         _rigidBody.gravityScale = 0f;
         _rigidBody.velocity = new Vector2(_rigidBody.velocity.x, 0);
