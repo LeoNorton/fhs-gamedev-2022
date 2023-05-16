@@ -67,6 +67,9 @@ public enum SoundType
     Splash,
     Step,
     Wind,
+    Trainhorn,
+    Trainmove,
+
 }
 
 [System.Serializable]
