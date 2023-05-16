@@ -56,17 +56,17 @@ public class SoundManager : MonoBehaviour
 [System.Serializable]
 public enum SoundType
 {
-    Bleh,
-    Eat,
-    Icky,
-    Condiment,
-    Vegetable,
-    Meat,
-    Woosh,
-    Toaster,
     Click,
-    Bell,
-    Thud,
+    Dashy,
+    Death,
+    Drinkwater,
+    Hurty,
+    Jump,
+    Landing,
+    Levelwin,
+    Splash,
+    Step,
+    Wind,
 }
 
 [System.Serializable]

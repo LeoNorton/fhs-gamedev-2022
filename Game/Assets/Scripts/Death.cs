@@ -21,11 +21,14 @@ public class Death : MonoBehaviour
     {
        if (waterLevel.WaterAmount <= 0)
         {
+            SoundManager.Instance.PlaySoundEffect(SoundType.Death);
+            waterLevel.WaterAmount = 1;
             DeathScreen.SetActive(true);
             Time.timeScale = 0;
         }
         if (Input.GetKeyDown(KeyCode.E) && DeathScreen.activeSelf)
         {
+            SoundManager.Instance.PlaySoundEffect(SoundType.Click);
             transform.position = checkpoint.transform.position;
             DeathScreen.SetActive(false);
             DeathTextUI.text = DeathTextList[ Random.Range(0, DeathTextList.Length)];

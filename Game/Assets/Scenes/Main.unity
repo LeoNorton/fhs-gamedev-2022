@@ -11625,6 +11625,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2099177118}
   - component: {fileID: 2099177117}
+  - component: {fileID: 2099177119}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -11659,6 +11660,75 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2099177119
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2099177116}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0faba15dfdebe3a4b90d7156157785ab, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _volumeMultiplier: 1
+  _soundEffects:
+  - name: 
+    Type: 0
+    Clip: {fileID: 8300000, guid: f0dcc93a183707041a2036cea4b25481, type: 3}
+    Volume: 1
+    Vary: 0
+  - name: 
+    Type: 1
+    Clip: {fileID: 8300000, guid: c4baae2b3c5390c48a88e91cee6db079, type: 3}
+    Volume: 1
+    Vary: 0
+  - name: 
+    Type: 2
+    Clip: {fileID: 8300000, guid: 50743ed5ca0a1a645b0a62f8c56fb27e, type: 3}
+    Volume: 1
+    Vary: 0
+  - name: 
+    Type: 3
+    Clip: {fileID: 8300000, guid: a8d5a841907b75f43b5b2afe1c67c03a, type: 3}
+    Volume: 1
+    Vary: 0
+  - name: 
+    Type: 4
+    Clip: {fileID: 8300000, guid: 29be6e2b146a50840ba5b2c7ed49a7d6, type: 3}
+    Volume: 1
+    Vary: 0
+  - name: 
+    Type: 5
+    Clip: {fileID: 8300000, guid: df697c8288764f44cacb925b1a78b658, type: 3}
+    Volume: 1
+    Vary: 0
+  - name: 
+    Type: 6
+    Clip: {fileID: 8300000, guid: 99aff494120b6084eab43c7ee3f6ed3f, type: 3}
+    Volume: 1
+    Vary: 0
+  - name: 
+    Type: 7
+    Clip: {fileID: 8300000, guid: 6957abe63d0e23d41a9a186a726bcbcf, type: 3}
+    Volume: 1
+    Vary: 0
+  - name: 
+    Type: 8
+    Clip: {fileID: 8300000, guid: c4e69669368f9814c9afb7ff9b99a926, type: 3}
+    Volume: 1
+    Vary: 0
+  - name: 
+    Type: 9
+    Clip: {fileID: 8300000, guid: cfd36a36216ab1c4fa1d040afca0d471, type: 3}
+    Volume: 1
+    Vary: 0
+  - name: 
+    Type: 10
+    Clip: {fileID: 8300000, guid: 168bd1a65918df1408bbd72d1e52dbe8, type: 3}
+    Volume: 1
+    Vary: 0
 --- !u!4 &2102480899 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8214778688951250306, guid: 8e3519ecb04b88847b0e61ec105624b7, type: 3}
