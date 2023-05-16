@@ -19,12 +19,13 @@ public class Death : MonoBehaviour
 
     void Update()
     {
-       if (waterLevel.WaterAmount <= 0)
+
+       if (waterLevel.WaterAmount <= 0 && !DeathScreen.activeSelf)
         {
             SoundManager.Instance.PlaySoundEffect(SoundType.Death);
             waterLevel.WaterAmount = 1;
             DeathScreen.SetActive(true);
-            Time.timeScale = 0;
+            //Time.timeScale = 0;
         }
         if (Input.GetKeyDown(KeyCode.E) && DeathScreen.activeSelf)
         {
@@ -32,7 +33,7 @@ public class Death : MonoBehaviour
             transform.position = checkpoint.transform.position;
             DeathScreen.SetActive(false);
             DeathTextUI.text = DeathTextList[ Random.Range(0, DeathTextList.Length)];
-            Time.timeScale = 1;
+            //Time.timeScale = 1;
             waterLevel.WaterAmount = 100;
             waterLevel.IsInvincible = false;
         }
