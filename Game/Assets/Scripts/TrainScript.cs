@@ -17,6 +17,7 @@ public class TrainScript : MonoBehaviour
     void Start()
     {
         traveling = false;
+
     }
 
     // Update is called once per frame
@@ -28,6 +29,7 @@ public class TrainScript : MonoBehaviour
     public void goToStop(int target)
     {
         if (traveling) return;
+        SoundManager.Instance.PlaySoundEffect(SoundType.Trainhorn);
         traveling = true;
         Sequence s = DOTween.Sequence();
         s.Append(transform.DORotate(new Vector3(0, target > stopNumber ? 0 : 180, 0), 0.5f));
@@ -40,8 +42,9 @@ public class TrainScript : MonoBehaviour
             else
             {
                 stopNumber--;
+
             }
-            s.Append(transform.DOMove(trainStops[stopNumber].transform.position, 1f));
+            s.Append(transform.DOMove(trainStops[stopNumber].transform.position, 1f).OnStart(() => SoundManager.Instance.PlaySoundEffect(SoundType.Trainmove)));
 
         }
         s.OnComplete(() => traveling = false);
